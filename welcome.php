@@ -1,5 +1,24 @@
 <?php
    include('session.php');
+   session_start();
+
+   $email   = $_SESSION['login_user'];
+   $sql     = "SELECT TITLE FROM CATEGORY WHERE U_EMAIL = '$email'";
+   $result  = mysqli_query($db, $sql);
+
+   echo "<h1> Welcome".$_SESSION['login_user']."</h1>";
+   echo "<div>";
+
+   Echo "Current Categories";
+   while( $row = mysqli_fetch_array($result) ){
+      $title = $row['TITLE'];
+      echo "<div>" .$title. "</div>";
+   }
+   echo "</div>";
+   echo "<a href='register_category.php'> \n Add a new Category</a>";
+
+
+
 ?>
 <html">
    
@@ -7,12 +26,10 @@
       <title>Welcome </title>
    </head>
    
-   <body>
-      <h1>Welcome 
-      	<?php echo $login_session;
-      		  echo $_SESSION['login_user'];
-              echo "<a href='register_category.php'> \n Add a new Category</a>";
-      	?></h1> 
+   <body> 
+      <?php echo $login_session;
+              
+      ?> 
       <h2><a href = "logout.php">Sign Out</a></h2>
    </body>
    
