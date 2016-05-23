@@ -1,0 +1,61 @@
+body{
+	width: 100%;
+}
+.WelTitle h1 {
+	left:0;
+	right: 0;
+}
+.box h1 {
+	font-size: 20px;
+}
+.box {
+  background:#fff;
+  transition:all 0.2s ease;
+  border:2px solid #dadada;
+  margin-top: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-clip: padding-box;
+  padding:0;
+  min-height: 150px;
+}
+
+.box:hover {
+  border:2px solid #525C7A;
+}
+
+.box span.box-title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.box .box-content {
+  padding: 16px;
+  border-radius: 0 0 2px 2px;
+  background-clip: padding-box;
+  box-sizing: border-box;
+}
+.box .box-content p {
+  color:#515c66;
+  text-transform:none;
+}
+
+.border {
+    min-width: 100%;
+    min-height: 30px;
+    padding: 0;
+}
+.border i {
+    font-size: 20px;
+    float: right;
+    padding: 5px;
+    color: #f5f5f5;
+}
+.border i.hover{
+	color: black;
+}
+#exitIcon{
+	float: left !important;
+}

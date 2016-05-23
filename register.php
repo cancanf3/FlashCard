@@ -1,6 +1,5 @@
 <?php
-	include($_SERVER['DOCUMENT_ROOT'].'/FlashCard/Config.php');
-
+	include($_SERVER["DOCUMENT_ROOT"]. '/FlashCard/Config.php');
 	session_start();
 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,7 +12,7 @@
 
 		if ( mysqli_query($db, $sql) ) {
 			echo "Account created successfully";
-			echo "<a href='login.php'> go back </a>";
+			echo "<a href='Login.php'> go back </a>";
 		}
 		else {
 			"Error: " . $_POST['email'] . "<br>" . mysqli_error($db);

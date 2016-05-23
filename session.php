@@ -1,5 +1,5 @@
 <?php
-   include($_SERVER['DOCUMENT_ROOT'].'/FlashCard/Config.php');
+   include($_SERVER["DOCUMENT_ROOT"]. '/FlashCard/Config.php');
    session_start();
    
    $user_check = $_SESSION['login_user'];

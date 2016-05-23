@@ -6,12 +6,13 @@
 
 		$u_email 	  = mysqli_real_escape_string($db, $_SESSION['login_user']);
 		$title 	  	  = mysqli_real_escape_string($db, $_POST['title']);
+		$description  = mysqli_real_escape_string($db, $_POST['description']);
 
 		$sql 		  = "SELECT * FROM CATEGORY WHERE U_EMAIL = '$u_email'";
 		$result 	  = mysqli_query($db,$sql);
 		$count  	  = mysqli_num_rows($result) + 1;
 
-		$sql 		  = "INSERT INTO CATEGORY (U_EMAIL, TITLE, COUNT) VALUES ('$u_email', '$title', '$count')";
+		$sql 		  = "INSERT INTO CATEGORY (U_EMAIL, TITLE, COUNT, DESCRIPTION) VALUES ('$u_email', '$title', '$count', '$description')";
 
 		if(mysqli_query($db,$sql)) {
 			echo "Category created sucessfully";
@@ -59,6 +60,7 @@
                
                <form action = "" method = "post">
                   <label>Title  :</label><input type = "text" name = "title" class = "box"/><br /><br />
+                  <label>Description  :</label><input type = "text" name = "description" class = "box"/><br /><br />
                   <input type = "submit" value = " Submit "/><br />
                </form>
                
