@@ -1,14 +1,14 @@
 <?php
-   include("config.php");
+   include($_SERVER['DOCUMENT_ROOT'].'/FlashCard/Config.php');
    session_start();
    
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form 
-      
       $myusername = mysqli_real_escape_string($db,$_POST['username']);
       $mypassword = md5(mysqli_real_escape_string($db,$_POST['password'])); 
       
       $sql = "SELECT * FROM USER WHERE EMAIL = '$myusername' and PASSWORD = '$mypassword'";
+      
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $active = $row['NAME'];

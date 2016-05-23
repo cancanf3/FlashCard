@@ -1,5 +1,5 @@
 <?php
-   define('DB_SERVER', '107.180.41.49:3306');
+   define('DB_SERVER', '127.0.0.1');
    define('DB_USERNAME', 'Flashcard35');
    define('DB_PASSWORD', 'FlashdCard543');
    define('DB_DATABASE', 'Flashcards1');
