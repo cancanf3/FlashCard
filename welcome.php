@@ -1,4 +1,4 @@
-<html">
+<html>
    <head>
       <title>Welcome </title>
       <link rel="stylesheet" type="text/css" href="style.css">
@@ -37,13 +37,13 @@
             echo '<div class="box">';
             echo '<div class="border" style="background-color:'.$color[$i].'"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
             $title = $row['TITLE'];
-            echo '<div class="box-content" > <h1 class="tag-title"> ' .$title. ": </h1> ";
+            echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title"> ' .$title. "</h1> ";
             $description = $row['DESCRIPTION'];
             echo "<p>" .$description. "</p>";  
             //echo '<button type="button" class="btn btn-primary btn-round-lg btn-lg">  </button>';
             echo "</div> </div> </div>";
             $i++;
-            if($i = 5){ 
+            if($i == 5){ 
                $i = 0;
             }
           
@@ -53,41 +53,34 @@
          echo "<a href='register_category.php'> \n Add a new Category</a>";
       ?>   
       <?php echo $login_session; ?> 
-      <h2><a href = "logout.php">Sign Out</a></h2>
+      <h2><a href = "/FlashCard/Logout.php">Sign Out</a></h2>
       </div>
       </div>
    </body>
-   
-</html>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
+   $(document).ready(function() {
 
-   $(".fa fa-trash-o").click(function(e) {
-      e.preventDefault();
+      $(".fa-trash-o").click(function() {
 
-      var title  = $(this).parent().parent().children(".box-content").children(".tag-title").text();
-      var box    = $(this).parent().parent().parent()
-      var mydata = 'DEL_CATEGORY=' + title;
+         var title  = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+         var box    = $(this).parent().parent().parent();
+         var mydata = 'DEL_CATEGORY=' + title;
+         $(this).hide();
 
-      $(this).hide();
-
-      jQuery.ajax( {
-         type: "POST",
-         url: "respond.php",
-         data: mydata,
-         success:function(response) {
-            box.fadeOut();
-
-         }
-         error:function (xhr, ajaxOptions, thrownError) {
-            alert(thrownError);
-         }
+         $.ajax( {
+            type: "POST",
+            url: "/FlashCard/respond.php",
+            data: mydata,
+            success:function(respond) {
+               box.fadeOut();
+            }
+         });
       });
-
-
-   });
 
 
 });
 </script>
+   
+</html>
+
