@@ -25,17 +25,16 @@
 		}
 
 	}	
-	elseif (isset($_POST["DEL_CATEGORY"]) && strlen($_POST["DEL_CATEGORY"]) > 0) {
+	elseif (isset($_POST['DEL_CATEGORY']) && strlen($_POST['DEL_CATEGORY']) > 0) {
 
 		$u_email 	  = mysqli_real_escape_string($db, $_SESSION['login_user']);
-		$title 		  = mysqli_real_escape_string($db, $title);
+		$title 		  = mysqli_real_escape_string($db, $_POST['DEL_CATEGORY']);
 		$sql		  = "DELETE FROM CATEGORY WHERE U_EMAIL = '$u_email' AND TITLE = '$title'";
 		
 		if (!mysqli_query($db,$sql)) {
 			header("HTTP/1.1 500 Could not delete record");
 			exit();
 		}
-		mysqli_close($db);
 
 	}
 	else {

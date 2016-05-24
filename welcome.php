@@ -37,7 +37,7 @@
             echo '<div class="box">';
             echo '<div class="border" style="background-color:'.$color[$i].'"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
             $title = $row['TITLE'];
-            echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title"> ' .$title. "</h1> ";
+            echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' .$title. "</h1> ";
             $description = $row['DESCRIPTION'];
             echo "<p>" .$description. "</p>";  
             //echo '<button type="button" class="btn btn-primary btn-round-lg btn-lg">  </button>';
@@ -69,10 +69,10 @@
          $(this).hide();
 
          $.ajax( {
-            type: "POST",
-            url: "/FlashCard/respond.php",
+            type: 'POST',
+            url: '/FlashCard/respond.php',
             data: mydata,
-            success:function(respond) {
+            success:function(data) {
                box.fadeOut();
             }
          });
