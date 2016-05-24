@@ -35,7 +35,7 @@
          while( $row = mysqli_fetch_array($result) ){
             echo '<div class="col-md-3 text-center">';
             echo '<div class="box">';
-            echo '<div class="border" style="background-color:'.$color[$i].'"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <a href=""> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </a>  </div>';
+            echo '<div class="border" style="background-color:'.$color[$i].'"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
             $title = $row['TITLE'];
             echo '<div class="box-content" > <h1 class="tag-title"> ' .$title. ": </h1> ";
             $description = $row['DESCRIPTION'];
@@ -43,7 +43,9 @@
             //echo '<button type="button" class="btn btn-primary btn-round-lg btn-lg">  </button>';
             echo "</div> </div> </div>";
             $i++;
-            if($i > 5){ $i = 0;}
+            if($i = 5){ 
+               $i = 0;
+            }
           
          }
          echo "</div> </div> </div>";
@@ -57,3 +59,35 @@
    </body>
    
 </html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+   $(".fa fa-trash-o").click(function(e) {
+      e.preventDefault();
+
+      var title  = $(this).parent().parent().children(".box-content").children(".tag-title").text();
+      var box    = $(this).parent().parent().parent()
+      var mydata = 'DEL_CATEGORY=' + title;
+
+      $(this).hide();
+
+      jQuery.ajax( {
+         type: "POST",
+         url: "respond.php",
+         data: mydata,
+         success:function(response) {
+            box.fadeOut();
+
+         }
+         error:function (xhr, ajaxOptions, thrownError) {
+            alert(thrownError);
+         }
+      });
+
+
+   });
+
+
+});
+</script>
