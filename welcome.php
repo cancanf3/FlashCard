@@ -79,6 +79,7 @@
       ?>   
       <?php echo $login_session; ?> 
       <h2><a href = "/FlashCard/Logout.php">Sign Out</a></h2>
+<<<<<<< HEAD
 
    </body>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -98,6 +99,15 @@
 
 
       /* Delete Category */
+=======
+      </div>
+      </div>
+   </body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+   $(document).ready(function() {
+
+>>>>>>> origin/master
       $(".fa-trash-o").click(function() {
 
          var title  = $(this).parent().parent().children("#box-content").children("#tag-title").text();
@@ -109,14 +119,22 @@
             type: 'POST',
             url: '/FlashCard/respond.php',
             data: mydata,
+<<<<<<< HEAD
             success:function(respond) {
+=======
+            success:function(data) {
+>>>>>>> origin/master
                box.fadeOut();
             }
          });
       });
 
 
+<<<<<<< HEAD
    });   
+=======
+});
+>>>>>>> origin/master
 </script>
    
 </html>
