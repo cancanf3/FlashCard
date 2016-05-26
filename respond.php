@@ -3,11 +3,11 @@
 	session_start();
 
 
-	if (isset($_POST["ADD_CATEGORY"]) && strlen($_POST["ADD_CATEGORY"]) > 0) {
+	if (isset($_POST["ADD_CATEGORY_TITLE"]) && strlen($_POST["ADD_CATEGORY_TITLE"]) > 0) {
 
 		$u_email 	  = mysqli_real_escape_string($db, $_SESSION['login_user']);
-		$title 	  	  = mysqli_real_escape_string($db, $_POST['title']);
-		$description  = mysqli_real_escape_string($db, $_POST['description']);
+		$title 	  	  = mysqli_real_escape_string($db, $_POST['ADD_CATEGORY_TITLE']);
+		$description  = mysqli_real_escape_string($db, $_POST['ADD_CATEGORY_DES']);
 
 		$sql 		  = "SELECT * FROM CATEGORY WHERE U_EMAIL = '$u_email'";
 		$result 	  = mysqli_query($db,$sql);
@@ -15,13 +15,12 @@
 
 		$sql 		  = "INSERT INTO CATEGORY (U_EMAIL, TITLE, COUNT, DESCRIPTION) VALUES ('$u_email', '$title', '$count', '$description')";
 
-		if (mysqli_query($db,$sql)) {
-			header("Category created sucessfully");
+		if (!mysqli_query($db,$sql)) {
+			header("Category was created already");
 			exit();
 		}
 		else {
-			header("Category was created already");
-			exit();
+
 		}
 
 	}	

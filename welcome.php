@@ -71,7 +71,7 @@
   			</div>";
       	 echo "<div class='modal-footer'>";
          echo "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
-         echo "<button type='button' class='btn btn-primary'>Save changes</button>";
+         echo "<button type='button' id='saved-button' class='btn btn-primary'>Save changes</button>";
       	 echo "</div>";
    		 echo "</div>";
   		 echo "</div>" ;
@@ -79,7 +79,6 @@
       ?>   
       <?php echo $login_session; ?> 
       <h2><a href = "/FlashCard/Logout.php">Sign Out</a></h2>
-<<<<<<< HEAD
 
    </body>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -89,25 +88,36 @@
  	$('#myInput').focus();
 	})
  </script>
+
 <script type="text/javascript">
    $(document).ready(function() {
       /* Add a Category */
-      $().click(function(){
+      $("#saved-button").click(function(){
+
+         if($(".input-sm").val()==='') {
+                alert("Please enter a Title.");
+                return false;
+         }
+
+
+         $.ajax( {
+            type: 'POST',
+            url: '/FlashCard/respond.php',
+            data: {ADD_CATEGORY_TITLE: $(".input-sm").val(), ADD_CATEGORY_DES: $(".input-lg").val()},
+
+            success:function(respond) {
+               $(".fade").fadeOut();
+               var box = "<div class='col-md-3 text-center'>  <div class='box'> <div class='border' style='background-color:'.$color[$i]. '> <a href=''> <i class='fa fa-pencil-square-o' aria-hidden='true'> </i> </a>  <i id='exitIcon' class='fa fa-trash-o' aria-hidden='true'></i> </div>' <div id='box-content' class='box-content' > <h1 id='tag-title' class='tag-title'> .$title. </h1> <p> .$description. </p> </div> </div>";
+               $("row").append(box);
+            }
+         }); 
       });
 
 
 
 
       /* Delete Category */
-=======
-      </div>
-      </div>
-   </body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript">
-   $(document).ready(function() {
 
->>>>>>> origin/master
       $(".fa-trash-o").click(function() {
 
          var title  = $(this).parent().parent().children("#box-content").children("#tag-title").text();
@@ -119,22 +129,17 @@
             type: 'POST',
             url: '/FlashCard/respond.php',
             data: mydata,
-<<<<<<< HEAD
+
             success:function(respond) {
-=======
-            success:function(data) {
->>>>>>> origin/master
                box.fadeOut();
             }
          });
       });
 
 
-<<<<<<< HEAD
+
    });   
-=======
-});
->>>>>>> origin/master
+
 </script>
    
 </html>
