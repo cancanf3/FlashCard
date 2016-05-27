@@ -107,8 +107,9 @@
 
             success:function(respond) {
                $(".fade").fadeOut();
-               var box = "<div class='col-md-3 text-center'>  <div class='box'> <div class='border' style='background-color:'.$color[$i]. '> <a href=''> <i class='fa fa-pencil-square-o' aria-hidden='true'> </i> </a>  <i id='exitIcon' class='fa fa-trash-o' aria-hidden='true'></i> </div>' <div id='box-content' class='box-content' > <h1 id='tag-title' class='tag-title'> .$title. </h1> <p> .$description. </p> </div> </div>";
-               $("row").append(box);
+               /*var box = "<div class='col-md-3 text-center'>  <div class='box'> <div class='border' style='background-color:'.$color[$i]. '> <a href=''> <i class='fa fa-pencil-square-o' aria-hidden='true'> </i> </a>  <i id='exitIcon' class='fa fa-trash-o' aria-hidden='true'></i> </div>' <div id='box-content' class='box-content' > <h1 id='tag-title' class='tag-title'> .$title. </h1> <p> .$description. </p> </div> </div>";*/
+               var box1 = $(".input-sm").val();
+               $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="box"> <div class="border"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div> </div> </div> </div>');
             }
          }); 
       });
