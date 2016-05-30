@@ -101,6 +101,9 @@ body{
     border-color: #be2815;
 }
 
+#login-access img{
+  max-width: 450px;
+}
 
 /* User Registered */ 
 /* --------------*/

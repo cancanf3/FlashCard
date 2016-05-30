@@ -65,7 +65,7 @@
 			</ul>
 			<div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
 				<div id="login-access" class="tab-pane fade active in">
-					<h2><i class="glyphicon glyphicon-log-in"></i> Accesso</h2>						
+					<img src="http://eliecervera.com/FlashCard/img/logo.png">					
 					<form method="post" action="" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal">
 						<div class="form-group ">
 							<label for="login" class="sr-only">Email</label>
@@ -78,9 +78,6 @@
 									placeholder="Password" value="" tabindex="2" />
 						</div>
 						<div class="checkbox">
-								<label class="control-label" for="remember_me">
-									<input type="checkbox" name="remember_me" id="remember_me" value="1" class="" tabindex="3" /> Ricordami
-								</label>
 						</div>
 						<br/>
 						<div class="form-group ">				
