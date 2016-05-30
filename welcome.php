@@ -115,8 +115,6 @@
       });
 
 
-
-
       /* Delete Category */
 
       $(".fa-trash-o").click(function() {
