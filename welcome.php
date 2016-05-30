@@ -40,7 +40,7 @@
             echo '<div class="box">';
             echo '<div class="border" style="background-color:'.$color[$i].'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
             $title = $row['TITLE'];
-            echo '<div id="box-content" class="box-content" > <a href="category.php" id="changePage"> <h1 id="tag-title" class="tag-title">' .$title. "</h1> </a> ";
+            echo '<div id="box-content" class="box-content" > <a href="#" onclick="check();"> <h1 id="tag-title" class="tag-title">' .$title. "</h1> </a> ";
             $description = $row['DESCRIPTION'];
             echo "<p id='tag-description'>" .$description. "</p>";  
             //echo '<button type="button" class="btn btn-primary btn-round-lg btn-lg">  </button>';
@@ -81,8 +81,8 @@
       <h2><a href = "/FlashCard/Logout.php">Sign Out</a></h2>
 
    </body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
    $(document).ready(function() {
@@ -98,8 +98,8 @@
         $('#myInput').focus();
         var titles           = $(this).parent().parent().children("#box-content").children("#tag-title").text();
         var descript         = $(this).parent().parent().children("#box-content").children("#tag-description").text();
-        $(".input-sm").value = "eola";
-
+        $(".input-sm").val(titles);
+        $(".input-lg").val(descript);
         
       });
 
@@ -149,16 +149,9 @@
       });
 
       /* Open Category */
-      $(function() {
-        var $menu = $('#changePage'), 
-        $target = $('#FLashCardDiv2');
-
-        $menu.on('click', '> a', function(event) {
-        var $this = $(this);
-        event.preventDefault();
-        $target.load($this.attr('href'));
-    });
-    });
+      function check(){
+        $('#FLashCardDiv2').load('category.php #First_div');
+      }
 
 
    });   
