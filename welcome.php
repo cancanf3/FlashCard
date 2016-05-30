@@ -93,7 +93,7 @@
         $('#buttonCat').click(function () {
           $('#myInput').focus();
 
-          $("#saved-button").click(function(){
+          $("#saved-button").unbind().click(function(){
             if($(".input-sm").val()==='') {
                     alert("Please enter a Title.");
                     return false;
@@ -106,10 +106,14 @@
                data: {ADD_CATEGORY_TITLE: $(".input-sm").val(), ADD_CATEGORY_DES: $(".input-lg").val()},
 
                 success:function(respond) {
-                  $(".fade").fadeOut();
+                  $('#myModal').modal('hide');
                   var titles   = $(".input-sm").val();
                   var descript = $(".input-lg").val();
-                  $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:#000"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p>' + descript + '</p> </div> </div> ');
+                  var colors   = ["#428bca","#ec971f","#c9302c","#5cb85c","#bb39d7"];
+                  var count    = $(".row").children().size();
+                  count        = count % 5;
+
+                  $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:'+colors[count]+'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true" ></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p>' + descript + '</p> </div> </div> ');
                 }
             }); 
           });
@@ -118,10 +122,12 @@
         });
 
         /* Edit a Category */
-        $('.fa-pencil-square-o').click(function() {
-          $('#myInput').focus();
+        $(document).on("click",".fa-pencil-square-o",function() {
+          $(document).on("focus",'#myInput');
+          //$('#myInput').focus();
           var old_titles           = $(this).parent().parent().children("#box-content").children("#tag-title").text();
           var descript             = $(this).parent().parent().children("#box-content").children("#tag-description").text();
+          alert(descript);
 
           $(".input-sm").val(old_titles);
           $(".input-lg").val(descript);
@@ -141,7 +147,9 @@
               data: {EDIT_CATEGORY_TITLE: titles, EDIT_CATEGORY_DES: descript, OLD_CATEGORY_TITLE: old_titles},
 
               success:function(respond) {
-                 $(".fade").fadeOut();
+                 $('#myModal').modal('hide');
+                 $(this).parent().parent().children("#box-content").children("#tag-title").text(titles);
+                 $(this).parent().parent().children("#box-content").children("#tag-description").text(descript);
               }
             });
              
@@ -154,7 +162,7 @@
 
 
         /* Delete a Category */
-        $(".fa-trash-o").click(function() {
+        $(document).on("click",".fa-trash-o", function() {
 
            var title  = $(this).parent().parent().children("#box-content").children("#tag-title").text();
            var box    = $(this).parent().parent().parent();
