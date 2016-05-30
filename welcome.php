@@ -24,11 +24,11 @@
 
          echo "<h1> Welcome ".$_SESSION['login_user']."</h1>";
          echo "</div>";
-         echo "<div>";
-
-         echo "Current Categories";
+         echo "<div class='FLashCardDiv'>";
+         echo "<div class='SubTitle'>";
+         echo "<p> Current Categories </p> ";
          echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' data-toggle='modal' data-target='#myModal'>";  // Modal Button
-         echo "Register Category</button>";
+         echo "Register Category</button> </div>";
          echo '<div class="container">';
          echo '<div class="row">';
 
@@ -36,7 +36,7 @@
          $color = array("#428bca","#ec971f","#c9302c","#5cb85c","#bb39d7");
 
          while( $row = mysqli_fetch_array($result) ){
-            echo '<div class="col-md-3 text-center">';
+            echo '<div class="col-md-4 text-center">';
             echo '<div class="box">';
             echo '<div class="border" style="background-color:'.$color[$i].'"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
             $title = $row['TITLE'];
@@ -107,9 +107,9 @@
 
             success:function(respond) {
                $(".fade").fadeOut();
-               /*var box = "<div class='col-md-3 text-center'>  <div class='box'> <div class='border' style='background-color:'.$color[$i]. '> <a href=''> <i class='fa fa-pencil-square-o' aria-hidden='true'> </i> </a>  <i id='exitIcon' class='fa fa-trash-o' aria-hidden='true'></i> </div>' <div id='box-content' class='box-content' > <h1 id='tag-title' class='tag-title'> .$title. </h1> <p> .$description. </p> </div> </div>";*/
-               var box1 = $(".input-sm").val();
-               $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="box"> <div class="border"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div> </div> </div> </div>');
+               var titles 	= $(".input-sm").val();
+               var descript1	= $(".input-lg").val();
+               $(".row").append('<div class="col-md-4 text-center">  <div class="box"> <div class="border" style="background-color:#000"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p>' + descript1 + '</p> </div> </div> ');
             }
          }); 
       });

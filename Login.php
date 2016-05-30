@@ -48,12 +48,51 @@
             border:#666666 solid 1px;
          }
       </style>
-      
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
    </head>
    
-   <body bgcolor = "#FFFFFF">
-	
-      <div align = "center">
+   <body >
+	<div class="container">
+
+	<div class="Welcome">
+	<div class="login-body">
+    <article class="container-login center-block">
+		<section>
+			<ul id="top-bar" class="nav nav-tabs nav-justified">
+				<li class="active"><a href="#login-access">Login</a></li>
+				<li><a href="register.php">Register</a></li>
+			</ul>
+			<div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
+				<div id="login-access" class="tab-pane fade active in">
+					<h2><i class="glyphicon glyphicon-log-in"></i> Accesso</h2>						
+					<form method="post" action="" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal">
+						<div class="form-group ">
+							<label for="login" class="sr-only">Email</label>
+								<input type="text" class="form-control" name="username" id="login_value" 
+									placeholder="Email" tabindex="1" value="" />
+						</div>
+						<div class="form-group ">
+							<label for="password" class="sr-only">Password</label>
+								<input type="password" class="form-control" name="password" id="password"
+									placeholder="Password" value="" tabindex="2" />
+						</div>
+						<div class="checkbox">
+								<label class="control-label" for="remember_me">
+									<input type="checkbox" name="remember_me" id="remember_me" value="1" class="" tabindex="3" /> Ricordami
+								</label>
+						</div>
+						<br/>
+						<div class="form-group ">				
+								<button type="submit" name="log-me-in" id="submit" tabindex="5" class="btn btn-lg btn-primary">Entra</button>
+						</div>
+					</form>			
+				</div>
+			</div>
+		</section>
+	</article>
+</div>
+      <!--<div align = "center">
          <div style = "width:300px; border: solid 1px #333333; " align = "left">
             <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
 				
@@ -72,7 +111,11 @@
 				
          </div>
 			
-      </div>
-
+      </div>-->
+     </div>
+    </div>
+    <!-- Scripts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
    </body>
 </html>
