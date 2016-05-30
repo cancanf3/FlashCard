@@ -38,7 +38,7 @@
          while( $row = mysqli_fetch_array($result) ){
             echo '<div class="col-md-4 text-center">';
             echo '<div class="box">';
-            echo '<div class="border" style="background-color:'.$color[$i].'"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
+            echo '<div class="border" style="background-color:'.$color[$i].'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
             $title = $row['TITLE'];
             echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' .$title. "</h1> ";
             $description = $row['DESCRIPTION'];
@@ -133,6 +133,13 @@
                box.fadeOut();
             }
          });
+      });
+
+      $("fa-pencil-square-o").click(function() {
+               
+
+
+
       });
 
 
