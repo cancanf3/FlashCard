@@ -96,8 +96,8 @@
       /* Modal for Edit a Category */
       $('.fa-pencil-square-o').click(function() {
         $('#myInput').focus();
-        var titles           = $(this).parent().parent().children("#box-content").children("#tag-title").text();
-        var descript         = $(this).parent().parent().children("#box-content").children("#tag-description").text();
+        var titles           = $(this).parent().parent().children("#box-content").children().children("#tag-title").val();
+        var descript         = $(this).parent().parent().children("#box-content").children().children("#tag-description").val();
         $(".input-sm").val(titles);
         $(".input-lg").val(descript);
         
