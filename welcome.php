@@ -40,7 +40,7 @@
             echo '<div class="box">';
             echo '<div class="border" style="background-color:'.$color[$i].'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
             $title = $row['TITLE'];
-            echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' .$title. "</h1>";
+            echo '<div id="box-content" class="box-content" > <h1 id="tag-title">' .$title. "</h1>";
             $description = $row['DESCRIPTION'];
             echo "<p id='tag-description'>" .$description. "</p>";  
             //echo '<button type="button" class="btn btn-primary btn-round-lg btn-lg">  </button>';
@@ -96,10 +96,31 @@
       /* Modal for Edit a Category */
       $('.fa-pencil-square-o').click(function() {
         $('#myInput').focus();
-        var titles           = $(this).parent().parent().children("#box-content").children("#tag-title").val();
-        var descript         = $(this).parent().parent().children("#box-content").children("#tag-description").val();
+        var titles           = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+        var descript         = $(this).parent().parent().children("#box-content").children("#tag-description").text();
+
         $(".input-sm").val(titles);
         $(".input-lg").val(descript);
+
+        if($(".input-sm").val()==='') {
+                alert("Please enter a Title.");
+                return false;
+         }
+
+        $("#saved-button").click(function(){ 
+          $.ajax( {
+            type: 'POST',
+            url: '/FlashCard/respond.php',
+            data: {EDIT_CATEGORY_TITLE: titles, EDIT_CATEGORY_DES: descript},
+
+            success:function(respond) {
+               
+            }
+          });  
+        });
+
+        
+
         
       });
 
