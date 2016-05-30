@@ -24,7 +24,7 @@
 
          echo "<h1> Welcome ".$_SESSION['login_user']."</h1>";
          echo "</div>";
-         echo "<div class='FLashCardDiv' id='FLashCardDiv'>";
+         echo "<div class='FLashCardDiv' id='FLashCardDiv2'>";
          echo "<div class='SubTitle'>";
          echo "<p> Current Categories </p> ";
          echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' data-toggle='modal' data-target='#myModal'>";  // Modal Button
@@ -55,27 +55,27 @@
 
          
          echo "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>";
-  		 echo  "<div class='modal-dialog' role='document'>";
-   		 echo "<div class='modal-content'>";
+  		   echo  "<div class='modal-dialog' role='document'>";
+   		   echo "<div class='modal-content'>";
       	 echo "<div class='modal-header'>";
          echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
          echo "<h4 class='modal-title' id='myModalLabel'>Modal title</h4>";
       	 echo "</div>";
       	 echo "<div class='form-group'>
-    			<label for='inputsm'>Category Title</label>
-    			<input class='form-control input-sm' id='inputsm' type='text'>
-  			  </div>
-  			  <div class='form-group'>
-  			  	<label for='inputlg'>Description</label>
-    			<input class='form-control input-lg' id='inputlg' type='text'>
-  			</div>";
+    			     <label for='inputsm'>Category Title</label>
+    			     <input class='form-control input-sm' id='inputsm' type='text' value=''>
+  			       </div>
+  			       <div class='form-group'>
+  			         <label for='inputlg'>Description</label>
+    			       <input class='form-control input-lg' id='inputlg' type='text' value=''>
+  			       </div>";
       	 echo "<div class='modal-footer'>";
          echo "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
          echo "<button type='button' id='saved-button' class='btn btn-primary'>Save changes</button>";
       	 echo "</div>";
-   		 echo "</div>";
-  		 echo "</div>" ;
-		 echo "</div>"; // End Modal */
+   		   echo "</div>";
+  		   echo "</div>" ;
+		     echo "</div>"; // End Modal */
       ?>   
       <?php echo $login_session; ?> 
       <h2><a href = "/FlashCard/Logout.php">Sign Out</a></h2>
@@ -96,9 +96,11 @@
       /* Modal for Edit a Category */
       $('.fa-pencil-square-o').click(function() {
         $('#myInput').focus();
-        var titles   = $(this).parent().parent().children("#box-content").children("#tag-title").text();
-        var descript = $(this).parent().parent().children("#box-content").children("#tag-description").text();
-        alert(descript);
+        var titles           = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+        var descript         = $(this).parent().parent().children("#box-content").children("#tag-description").text();
+        $(".input-sm").value = "eola";
+
+        
       });
 
 
@@ -149,7 +151,7 @@
       /* Open Category */
       $(function() {
         var $menu = $('#changePage'), 
-        $target = $('#FLashCardDiv');
+        $target = $('#FLashCardDiv2');
 
         $menu.on('click', '> a', function(event) {
         var $this = $(this);
