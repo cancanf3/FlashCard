@@ -42,7 +42,7 @@
             $title = $row['TITLE'];
             echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' .$title. "</h1> ";
             $description = $row['DESCRIPTION'];
-            echo "<p>" .$description. "</p>";  
+            echo "<p id='tag-description'>" .$description. "</p>";  
             //echo '<button type="button" class="btn btn-primary btn-round-lg btn-lg">  </button>';
             echo "</div> </div> </div>";
             $i++;
@@ -83,14 +83,25 @@
    </body>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
- <script type="text/javascript"> 
- 	$('#myModal').on('shown.bs.modal', function () {
- 	$('#myInput').focus();
-	})
- </script>
 
 <script type="text/javascript">
    $(document).ready(function() {
+
+      /* Modal for Register a Category */
+      $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').focus();
+
+      });
+
+      /* Modal for Edit a Category */
+      $('.fa-pencil-square-o').click(function() {
+        $('#myInput').focus();
+        var titles   = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+        var descript = $(this).parent().parent().children("#box-content").children("#tag-description").text();
+        alert(descript);
+      });
+
+
       /* Add a Category */
       $("#saved-button").click(function(){
 
@@ -108,8 +119,8 @@
             success:function(respond) {
                $(".fade").fadeOut();
                var titles 	= $(".input-sm").val();
-               var descript1	= $(".input-lg").val();
-               $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:#000"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p>' + descript1 + '</p> </div> </div> ');
+               var descript	= $(".input-lg").val();
+               $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:#000"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p>' + descript + '</p> </div> </div> ');
             }
          }); 
       });
@@ -135,12 +146,7 @@
          });
       });
 
-      $("fa-pencil-square-o").click(function() {
-               
-
-
-
-      });
+      
 
 
 
