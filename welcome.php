@@ -40,7 +40,7 @@
             echo '<div class="box">';
             echo '<div class="border" style="background-color:'.$color[$i].'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
             $title = $row['TITLE'];
-            echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' .$title. "</h1> ";
+            echo '<div id="box-content" class="box-content" > <a id="changePage"href="category.php"> <h1 id="tag-title" class="tag-title">' .$title. "</h1> </a> ";
             $description = $row['DESCRIPTION'];
             echo "<p id='tag-description'>" .$description. "</p>";  
             //echo '<button type="button" class="btn btn-primary btn-round-lg btn-lg">  </button>';
@@ -146,8 +146,13 @@
          });
       });
 
-      
-
+      /* Open Category */
+      $(document).ready(function(){
+        $('#changePage').click(function(e){
+          e.preventDefault();
+          $("#FlahCardDyn").load($(this).attr('href'));
+        });
+      });
 
 
    });   
