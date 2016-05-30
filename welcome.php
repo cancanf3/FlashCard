@@ -24,7 +24,7 @@
 
          echo "<h1> Welcome ".$_SESSION['login_user']."</h1>";
          echo "</div>";
-         echo "<div class='FLashCardDiv' id='FLashCardDiv'>";
+         echo "<div class='FLashCardDiv' id='FLashCardDiv2'>";
          echo "<div class='SubTitle'>";
          echo "<p> Current Categories </p> ";
          echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' data-toggle='modal' data-target='#myModal'>";  // Modal Button
@@ -98,8 +98,8 @@
         $('#myInput').focus();
         var titles           = $(this).parent().parent().children("#box-content").children("#tag-title").text();
         var descript         = $(this).parent().parent().children("#box-content").children("#tag-description").text();
-        $(".input-sm").val() = titles;
-
+        $(".input-sm").val(titles);
+        $(".input-lg").val(descript);
         
       });
 
@@ -151,7 +151,7 @@
       /* Open Category */
       $(function() {
         var $menu = $('#changePage'), 
-        $target = $('#FLashCardDiv');
+        $target = $('#FLashCardDiv2');
 
         $menu.on('click', '> a', function(event) {
         var $this = $(this);
