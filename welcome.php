@@ -170,15 +170,10 @@
       });
 
       /* Open Category */
-      $(document). ready(function(){
         $("#tag-title"). click(function(){
 
         $("#FLashCardDiv2"). load ("category.php");
         });
-
-      });
-
-
 
    });   
 
