@@ -70,7 +70,7 @@
   			       </div>";
       	 echo "<div class='modal-footer'>";
          echo "<button type='button' id='close-button' class='btn btn-default' data-dismiss='modal'>Close</button>";
-         echo "<button type='button' id='saved-button' class='btn btn-primary'>Save changes</button>";
+         echo "<button type='submit' id='saved-button' class='btn btn-primary'>Save changes</button>";
       	 echo "</div>";
    		   echo "</div>";
   		   echo "</div>" ;
@@ -115,7 +115,7 @@
                   var count    = $(".row").children().size();
                   count        = count % 5;
 
-                  $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:'+colors[count]+'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true" ></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p>' + descript + '</p> </div> </div> ');
+                  $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:'+colors[count]+'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true" ></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p id="tag-description">' + descript + '</p> </div> </div> ');
                 },
                 error:function (xhr, ajaxOptions, thrownError){
                   alert(thrownError);
@@ -185,7 +185,7 @@
               data: mydata,
 
               success:function(respond) {
-                box.fadeOut();
+                box.remove();
               },
               error:function (xhr, ajaxOptions, thrownError){
                 alert(thrownError);
@@ -194,10 +194,24 @@
         });
 
         /* Open a Category */
-          $(".tag-title"). click(function(){
+          $(document).on("click",".tag-title", function(){
+            var catTitle = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+            var thedata = 'SHOW_CAT=' + catTitle;
+            
+            $.ajax( {
+              type: 'POST',
+              url: '/FlashCard/respond.php',
+              data: thedata,
 
-          $("#FLashCardDiv2"). load ("category.php");
-          });
+              success:function(respond) {
+                $("#FLashCardDiv2"). load ("category.php");
+              },
+              error:function (xhr, ajaxOptions, thrownError){
+                alert(thrownError);
+              }
+           });
+            
+          }); 
 
      });   
 
