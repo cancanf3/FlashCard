@@ -202,6 +202,7 @@
               type: 'POST',
               url: '/FlashCard/respond.php',
               data: thedata,
+              dataType: 'json',
 
               success:function(respond) {
                 $("#FLashCardDiv2"). load ("category.php");
