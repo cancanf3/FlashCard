@@ -205,7 +205,8 @@
               dataType: 'json',
 
               success:function(respond) {
-                $("#FLashCardDiv2"). load ("category.php");
+
+                $("#FLashCardDiv2"). load ("category.php" ,{ catTitle });
               },
               error:function (xhr, ajaxOptions, thrownError){
                 alert(thrownError);

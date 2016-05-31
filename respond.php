@@ -42,22 +42,6 @@
 		}
 			
 	}
-	elseif (isset($_POST["SHOW_CAT"]) && strlen($_POST["SHOW_CAT"]) > 0) {
-		
-		$u_email 	  = mysqli_real_escape_string($db, $_SESSION['login_user']);
-		$catTitle 	  = mysqli_real_escape_string($db, $_POST['SHOW_CAT']);
-		$sql 		  = "SELECT C_TITLE,TITLE, DEFINITION FROM QUESTION WHERE U_EMAIL= '$u_email' AND C_TITLE='$catTitle'";
-		$query 		  = mysqli_query($sql);
-
-    	$reusult = mysqli_fetch_assoc($query);
-    	echo json_encode($reusult);
-
-		if (!mysqli_query($db,$sql)) {
-			header("HTTP/1.1 500 Could not show record");
-			exit();
-		}
-			
-	}
 	else {
     	//Output error
     	header('HTTP/1.1 500 Error occurred, Could not process request!');
