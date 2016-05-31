@@ -43,7 +43,6 @@
             echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' .$title. "</h1>";
             $description = $row['DESCRIPTION'];
             echo "<p id='tag-description'>" .$description. "</p>";  
-            //echo '<button type="button" class="btn btn-primary btn-round-lg btn-lg">  </button>';
             echo "</div> </div> </div>";
             $i++;
             if($i == 5){ 
@@ -55,7 +54,7 @@
 
          
          echo "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>";
-  		   echo  "<div class='modal-dialog' role='document'>";
+  		   echo "<div class='modal-dialog' role='document'>";
    		   echo "<div class='modal-content'>";
       	 echo "<div class='modal-header'>";
          echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
@@ -70,8 +69,8 @@
     			       <input class='form-control input-lg' id='inputlg' type='text' value=''>
   			       </div>";
       	 echo "<div class='modal-footer'>";
-         echo "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
-         echo "<button type='button' id='saved-button' class='btn btn-primary'>Save changes</button>";
+         echo "<button type='button' id='close-button' class='btn btn-default' data-dismiss='modal'>Close</button>";
+         echo "<button type='submit' id='saved-button' class='btn btn-primary'>Save changes</button>";
       	 echo "</div>";
    		   echo "</div>";
   		   echo "</div>" ;
@@ -81,103 +80,170 @@
       <h2><a href = "/FlashCard/Logout.php">Sign Out</a></h2>
 
    </body>
+
+
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-   $(document).ready(function() {
+  <script type="text/javascript">
+     $(document).ready(function() {
 
-      /* Modal for Register a Category */
-      $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').focus();
+        /* Add a Category */
+        $('#buttonCat').click(function () {
+          $('#myInput').focus();
+          $(".input-sm").val("");
+          $(".input-lg").val("");
 
-      });
-
-      /* Modal for Edit a Category */
-      $('.fa-pencil-square-o').click(function() {
-        $('#myInput').focus();
-        var titles           = $(this).parent().parent().children("#box-content").children("#tag-title").text();
-        var descript         = $(this).parent().parent().children("#box-content").children("#tag-description").text();
-
-        $(".input-sm").val(titles);
-        $(".input-lg").val(descript);
-
-        if($(".input-sm").val()==='') {
-                alert("Please enter a Title.");
-                return false;
-         }
-
-        $("#saved-button").click(function(){ 
-          $.ajax( {
-            type: 'POST',
-            url: '/FlashCard/respond.php',
-            data: {EDIT_CATEGORY_TITLE: titles, EDIT_CATEGORY_DES: descript},
-
-            success:function(respond) {
-               
+          $("#saved-button").unbind().keypress(function(){
+            if($(".input-sm").val()==='') {
+                    alert("Please enter a Title.");
+                    return false;
             }
-          });  
+
+
+            $.ajax( {
+                type: 'POST',
+               url: '/FlashCard/respond.php',
+               data: {ADD_CATEGORY_TITLE: $(".input-sm").val(), ADD_CATEGORY_DES: $(".input-lg").val()},
+
+                success:function(respond) {
+                  $('#myModal').modal('hide');
+                  var titles   = $(".input-sm").val();
+                  var descript = $(".input-lg").val();
+                  var colors   = ["#428bca","#ec971f","#c9302c","#5cb85c","#bb39d7"];
+                  var count    = $(".row").children().size();
+                  count        = count % 5;
+
+                  $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:'+colors[count]+'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true" ></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p id="tag-description">' + descript + '</p> </div> </div> ');
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                  alert(thrownError);
+                }
+            }); 
+          });
+
+          $("#saved-button").unbind().click(function(){
+            if($(".input-sm").val()==='') {
+                    alert("Please enter a Title.");
+                    return false;
+            }
+
+
+            $.ajax( {
+                type: 'POST',
+               url: '/FlashCard/respond.php',
+               data: {ADD_CATEGORY_TITLE: $(".input-sm").val(), ADD_CATEGORY_DES: $(".input-lg").val()},
+
+                success:function(respond) {
+                  $('#myModal').modal('hide');
+                  var titles   = $(".input-sm").val();
+                  var descript = $(".input-lg").val();
+                  var colors   = ["#428bca","#ec971f","#c9302c","#5cb85c","#bb39d7"];
+                  var count    = $(".row").children().size();
+                  count        = count % 5;
+
+                  $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:'+colors[count]+'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true" ></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p id="tag-description">' + descript + '</p> </div> </div> ');
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                  alert(thrownError);
+                }
+            }); 
+          });
+
+
         });
 
-        
+        /* Edit a Category */
+        $(document).on("click",".fa-pencil-square-o",function() {
+          
+          $(document).on("focus",'#myInput');
 
-        
-      });
+          var old_titles          = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+          var descript            = $(this).parent().parent().children("#box-content").children("#tag-description").text();
+          var old_titles_obj      = $(this).parent().parent().children("#box-content").children("#tag-title");
+          var old_descript_obj    = $(this).parent().parent().children("#box-content").children("#tag-description");
 
+          $(".input-sm").val(old_titles);
+          $(".input-lg").val(descript);
+          $("#saved-button").unbind().click(function(){ 
+            
+          if ($(".input-sm").val()==='') {
+            alert("Please enter a Title.");
+            return false;
+          }
 
-      /* Add a Category */
-      $("#saved-button").click(function(){
+            var titles    = $(".input-sm").val();
+            var descript  = $(".input-lg").val();
 
-         if($(".input-sm").val()==='') {
-                alert("Please enter a Title.");
-                return false;
-         }
+            $.ajax( {
+              type: 'POST',
+              url: '/FlashCard/respond.php',
+              data: {EDIT_CATEGORY_TITLE: titles, EDIT_CATEGORY_DES: descript, OLD_CATEGORY_TITLE: old_titles},
 
+              success:function(respond) {
+                 $('#myModal').modal('hide');
+                 old_titles_obj.text(titles);
+                 old_descript_obj.text(descript);
+              },
+              error:function (xhr, ajaxOptions, thrownError){
+                alert(thrownError);
+              }
+            });
+             
+          });
 
-         $.ajax( {
-            type: 'POST',
-            url: '/FlashCard/respond.php',
-            data: {ADD_CATEGORY_TITLE: $(".input-sm").val(), ADD_CATEGORY_DES: $(".input-lg").val()},
+          
 
-            success:function(respond) {
-               $(".fade").fadeOut();
-               var titles 	= $(".input-sm").val();
-               var descript	= $(".input-lg").val();
-               $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:#000"> <a href=""> <i class="fa fa-pencil-square-o" aria-hidden="true"> </i> </a>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p>' + descript + '</p> </div> </div> ');
-            }
-         }); 
-      });
-
-
-      /* Delete Category */
-
-      $(".fa-trash-o").click(function() {
-
-         var title  = $(this).parent().parent().children("#box-content").children("#tag-title").text();
-         var box    = $(this).parent().parent().parent();
-         var mydata = 'DEL_CATEGORY=' + title;
-         $(this).hide();
-
-         $.ajax( {
-            type: 'POST',
-            url: '/FlashCard/respond.php',
-            data: mydata,
-
-            success:function(respond) {
-               box.fadeOut();
-            }
-         });
-      });
-
-      /* Open Category */
-        $(".tag-title"). click(function(){
-
-        $("#FLashCardDiv2"). load ("category.php");
+          
         });
 
-   });   
 
-</script>
+        /* Delete a Category */
+        $(document).on("click",".fa-trash-o", function() {
+
+           var title  = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+           var box    = $(this).parent().parent().parent();
+           var mydata = 'DEL_CATEGORY=' + title;
+           $(this).hide();
+
+           $.ajax( {
+              type: 'POST',
+              url: '/FlashCard/respond.php',
+              data: mydata,
+
+              success:function(respond) {
+                box.remove();
+              },
+              error:function (xhr, ajaxOptions, thrownError){
+                alert(thrownError);
+              }
+           });
+        });
+
+        /* Open a Category */
+          $(document).on("click",".tag-title", function(){
+            var catTitle = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+            var thedata = 'SHOW_CAT=' + catTitle;
+            $.ajax( {
+              type: 'POST',
+              url: '/FlashCard/respond.php',
+              data: thedata,
+
+              success:function(respond) {
+                $("#FLashCardDiv2"). load ("category.php");
+              },
+              error:function (xhr, ajaxOptions, thrownError){
+                alert(thrownError);
+              }
+           });
+
+            
+          });
+
+     });   
+
+  </script>
    
 </html>
 

@@ -8,19 +8,11 @@
 		$u_email 	  = mysqli_real_escape_string($db, $_SESSION['login_user']);
 		$title 	  	  = mysqli_real_escape_string($db, $_POST['ADD_CATEGORY_TITLE']);
 		$description  = mysqli_real_escape_string($db, $_POST['ADD_CATEGORY_DES']);
-
-		$sql 		  = "SELECT * FROM CATEGORY WHERE U_EMAIL = '$u_email'";
-		$result 	  = mysqli_query($db,$sql);
-		$count  	  = mysqli_num_rows($result) + 1; // Va a ser eliminado
-
-		$sql 		  = "INSERT INTO CATEGORY (U_EMAIL, TITLE, COUNT, DESCRIPTION) VALUES ('$u_email', '$title', '$count', '$description')";
+		$sql 		  = "INSERT INTO CATEGORY (U_EMAIL, TITLE, DESCRIPTION) VALUES ('$u_email', '$title', '$description')";
 
 		if (!mysqli_query($db,$sql)) {
-			header("Category was created already");
+			header("HTTP/1.1 500 Category was created already");
 			exit();
-		}
-		else {
-
 		}
 
 	}	
@@ -36,17 +28,46 @@
 		}
 
 	}
-	elseif ($_POST["EDIT_CATEGORY_TITLE"]) && strlen($_POST["EDIT_CATEGORY_TITLE"]) > 0) {
-		/* code */
+	elseif (isset($_POST["EDIT_CATEGORY_TITLE"]) && strlen($_POST["EDIT_CATEGORY_TITLE"]) > 0) {
+		
+		$u_email 	  = mysqli_real_escape_string($db, $_SESSION['login_user']);
+		$old_title 	  = mysqli_real_escape_string($db, $_POST['OLD_CATEGORY_TITLE']);
+		$title 		  = mysqli_real_escape_string($db, $_POST['EDIT_CATEGORY_TITLE']);
+		$description  = mysqli_real_escape_string($db, $_POST['EDIT_CATEGORY_DES']);
+		$sql 		  = "UPDATE CATEGORY SET TITLE='$title', DESCRIPTION='$description' WHERE U_EMAIL='$u_email' AND TITLE='$old_title'";
 
+		if (!mysqli_query($db,$sql)) {
+			header("HTTP/1.1 500 Could not update record");
+			exit();
+		}
+			
+	}
+	elseif (isset($_POST["SHOW_CAT"]) && strlen($_POST["SHOW_CAT"]) > 0) {
+		
+		$catTitle 	  = mysqli_real_escape_string($db, $_SESSION['SHOW_CAT']);
+		$sql 		  = "UPDATE CATEGORY SET TITLE='$title', DESCRIPTION='$description' WHERE U_EMAIL='$u_email' AND TITLE='$old_title'";
+
+		if (!mysqli_query($db,$sql)) {
+			header("HTTP/1.1 500 Could not update record");
+			exit();
+		}
+			
 	}
 	else {
     	//Output error
     	header('HTTP/1.1 500 Error occurred, Could not process request!');
     	exit();
-	}
+    }
+
 
 
 
 
 ?>
+
+	/* elseif ($_POST["EDIT_CATEGORY_TITLE"]) && strlen($_POST["EDIT_CATEGORY_TITLE"]) > 0) {
+
+
+
+
+	} */
