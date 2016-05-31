@@ -92,6 +92,8 @@
         /* Add a Category */
         $('#buttonCat').click(function () {
           $('#myInput').focus();
+          $(".input-sm").val("");
+          $(".input-lg").val("");
 
           $("#saved-button").unbind().click(function(){
             if($(".input-sm").val()==='') {
@@ -114,6 +116,9 @@
                   count        = count % 5;
 
                   $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:'+colors[count]+'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true" ></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p>' + descript + '</p> </div> </div> ');
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                  alert(thrownError);
                 }
             }); 
           });
@@ -123,20 +128,22 @@
 
         /* Edit a Category */
         $(document).on("click",".fa-pencil-square-o",function() {
+          
           $(document).on("focus",'#myInput');
-          //$('#myInput').focus();
-          var old_titles           = $(this).parent().parent().children("#box-content").children("#tag-title").text();
-          var descript             = $(this).parent().parent().children("#box-content").children("#tag-description").text();
-          alert(descript);
+
+          var old_titles          = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+          var descript            = $(this).parent().parent().children("#box-content").children("#tag-description").text();
+          var old_titles_obj      = $(this).parent().parent().children("#box-content").children("#tag-title");
+          var old_descript_obj    = $(this).parent().parent().children("#box-content").children("#tag-description");
 
           $(".input-sm").val(old_titles);
           $(".input-lg").val(descript);
-          $("#saved-button").click(function(){ 
+          $("#saved-button").unbind().click(function(){ 
             
-            if($(".input-sm").val()==='') {
-              alert("Please enter a Title.");
-              return false;
-            }
+          if ($(".input-sm").val()==='') {
+            alert("Please enter a Title.");
+            return false;
+          }
 
             var titles    = $(".input-sm").val();
             var descript  = $(".input-lg").val();
@@ -148,8 +155,11 @@
 
               success:function(respond) {
                  $('#myModal').modal('hide');
-                 $(this).parent().parent().children("#box-content").children("#tag-title").text(titles);
-                 $(this).parent().parent().children("#box-content").children("#tag-description").text(descript);
+                 old_titles_obj.text(titles);
+                 old_descript_obj.text(descript);
+              },
+              error:function (xhr, ajaxOptions, thrownError){
+                alert(thrownError);
               }
             });
              
