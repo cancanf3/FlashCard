@@ -58,16 +58,4 @@
     	header('HTTP/1.1 500 Error occurred, Could not process request!');
     	exit();
     }
-
-
-
-
-
 ?>
-
-	/* elseif ($_POST["EDIT_CATEGORY_TITLE"]) && strlen($_POST["EDIT_CATEGORY_TITLE"]) > 0) {
-
-
-
-
-	} */
