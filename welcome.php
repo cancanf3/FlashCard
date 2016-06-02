@@ -5,79 +5,88 @@
       <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> 
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-      
    </head>
    
    <body> 
-   <div class="container-fluid">
-      <div class="container">
-         <div class="WelTitle">
+      <div class="container-fluid">
+        <div class="container">
+            <div class="WelTitle">
 
-      <?php
-         include($_SERVER["DOCUMENT_ROOT"]. '/FlashCard/Config.php');
-         
-         session_start();
+              <?php
+                include($_SERVER["DOCUMENT_ROOT"]. '/FlashCard/Config.php');
+                 
+                session_start();
 
-         $email   = $_SESSION['login_user'];
-         $sql     = "SELECT TITLE, DESCRIPTION FROM CATEGORY WHERE U_EMAIL = '$email'";
-         $result  = mysqli_query($db, $sql);
+                $email   = $_SESSION['login_user'];
+                $sql     = "SELECT TITLE, DESCRIPTION FROM CATEGORY WHERE U_EMAIL = '$email'";
+                $result  = mysqli_query($db, $sql);
 
-         echo "<h1> Welcome ".$_SESSION['login_user']."</h1>";
-         echo "</div>";
-         echo "<div class='FLashCardDiv' id='FLashCardDiv2'>";
-         echo "<div class='SubTitle'>";
-         echo "<p> Current Categories </p> ";
-         echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' data-toggle='modal' data-target='#myModal'>";  // Modal Button
-         echo "Register Category</button> </div>";
-         echo '<div class="container">';
-         echo '<div class="row">';
+                echo "<h1> Welcome ".$_SESSION['login_user']."</h1>";
+                echo "</div>";
+                echo "<div class='FLashCardDiv' id='FLashCardDiv2'>";
+                echo "<div class='SubTitle'>";
+                echo "<p> Current Categories </p> ";
+                echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' 
+                      data-toggle='modal' data-target='#myModal'>";
+                echo "Register Category</button> </div>";
+                echo '<div class="container">';
+                echo '<div class="row">';
 
-         $i = 0;
-         $color = array("#428bca","#ec971f","#c9302c","#5cb85c","#bb39d7");
+                $i = 0;
+                $color = array("#428bca","#ec971f","#c9302c","#5cb85c","#bb39d7");
 
-         while( $row = mysqli_fetch_array($result) ){
-            echo '<div class="col-md-3 text-center">';
-            echo '<div class="box">';
-            echo '<div class="border" style="background-color:'.$color[$i].'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
-            $title = $row['TITLE'];
-            echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' .$title. "</h1>";
-            $description = $row['DESCRIPTION'];
-            echo "<p id='tag-description'>" .$description. "</p>";  
-            echo "</div> </div> </div>";
-            $i++;
-            if($i == 5){ 
-               $i = 0;
-            }
-          
-         }
-         echo "</div> </div> </div>";
+                while( $row = mysqli_fetch_array($result) ){
+                  echo '<div class="col-md-3 text-center">';
+                  echo '<div class="box">';
+                  echo '<div class="border" style="background-color:'.$color[$i].'"> 
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" 
+                        data-target="#myModal"> </i>  <i id="exitIcon" 
+                        class="fa fa-trash-o" aria-hidden="true"></i> </div>';
+                  $title = $row['TITLE'];
+                  echo '<div id="box-content" class="box-content" > 
+                        <h1 id="tag-title" class="tag-title">' .$title. "</h1>";
+                  $description = $row['DESCRIPTION'];
+                  echo "<p id='tag-description'>" .$description. "</p>";  
+                  echo "</div> </div> </div>";
+                  $i++;
+                  if($i == 5){ 
+                    $i = 0;
+                  }
+                  
+                }
+                echo "</div> </div> </div>";
 
-         
-         echo "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>";
-  		   echo "<div class='modal-dialog' role='document'>";
-   		   echo "<div class='modal-content'>";
-      	 echo "<div class='modal-header'>";
-         echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
-         echo "<h4 class='modal-title' id='myModalLabel'>Modal title</h4>";
-      	 echo "</div>";
-      	 echo "<div class='form-group'>
-    			     <label for='inputsm'>Category Title</label>
-    			     <input class='form-control input-sm' id='inputsm' type='text' value=''>
-  			       </div>
-  			       <div class='form-group'>
-  			         <label for='inputlg'>Description</label>
-    			       <input class='form-control input-lg' id='inputlg' type='text' value=''>
-  			       </div>";
-      	 echo "<div class='modal-footer'>";
-         echo "<button type='button' id='close-button' class='btn btn-default' data-dismiss='modal'>Close</button>";
-         echo "<button type='submit' id='saved-button' class='btn btn-primary'>Save changes</button>";
-      	 echo "</div>";
-   		   echo "</div>";
-  		   echo "</div>" ;
-		     echo "</div>"; // End Modal */
-      ?>   
-      <?php echo $login_session; ?> 
-      <h2><a href = "/FlashCard/Logout.php">Sign Out</a></h2>
+                 
+                echo "<div class='modal fade' id='myModal' tabindex='-1' 
+                      role='dialog' aria-labelledby='myModalLabel'>";
+          		  echo "<div class='modal-dialog' role='document'>";
+           		  echo "<div class='modal-content'>";
+              	echo "<div class='modal-header'>";
+                echo "<button type='button' class='close' data-dismiss='modal' 
+                      aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+                echo "<h4 class='modal-title' id='myModalLabel'>Modal title</h4>";
+              	echo "</div>";
+              	echo "<div class='form-group'>
+            			      <label for='inputsm'>Category Title</label>
+            			      <input class='form-control input-sm' id='inputsm' type='text' value=''>
+          			        </div>
+          			        <div class='form-group'>
+          			        <label for='inputlg'>Description</label>
+            			      <input class='form-control input-lg' id='inputlg' type='text' value=''>
+          			      </div>";
+              	echo "<div class='modal-footer'>";
+                echo "<button type='button' id='close-button' class='btn btn-default' 
+                      data-dismiss='modal'>Close</button>";
+                echo "<button type='submit' id='saved-button' class='btn 
+                      btn-primary'>Save changes</button>";
+              	echo "</div>";
+           		  echo "</div>";
+          		  echo "</div>" ;
+        		    echo "</div>"; // End Modal */
+              ?>
+
+        <?php echo $login_session; ?> 
+        <h2><a href = "/FlashCard/Logout.php">Sign Out</a></h2>
 
    </body>
 
@@ -109,6 +118,7 @@
 
                 success:function(respond) {
                   $('#myModal').modal('hide');
+                  $('.modal-backdrop').remove();
                   var titles   = $(".input-sm").val();
                   var descript = $(".input-lg").val();
                   var colors   = ["#428bca","#ec971f","#c9302c","#5cb85c","#bb39d7"];
@@ -138,7 +148,9 @@
 
           $(".input-sm").val(old_titles);
           $(".input-lg").val(descript);
-          $("#saved-button").unbind().click(function(){ 
+
+
+          $("#saved-button").unbind().click(function(){   
             
           if ($(".input-sm").val()==='') {
             alert("Please enter a Title.");
@@ -155,19 +167,15 @@
 
               success:function(respond) {
                  $('#myModal').modal('hide');
+                 $('.modal-backdrop').remove();
                  old_titles_obj.text(titles);
                  old_descript_obj.text(descript);
               },
               error:function (xhr, ajaxOptions, thrownError){
                 alert(thrownError);
               }
-            });
-             
-          });
-
-          
-
-          
+            });   
+          });        
         });
 
 
@@ -195,8 +203,8 @@
 
         /* Open a Category */
           $(document).on("click",".tag-title", function(){
-            var catTitle = $(this).parent().parent().children("#box-content").children("#tag-title").text();
-            var thedata = 'SHOW_CAT=' + catTitle;
+            var catTitle        = $(this).parent().parent().children("#box-content").children("#tag-title").text();
+            var thedata         = 'SHOW_CAT=' + catTitle
             
             $.ajax( {
               type: 'POST',
@@ -205,8 +213,7 @@
               dataType: 'json',
 
               success:function(respond) {
-
-                $("#FLashCardDiv2"). load ("category.php" ,{ catTitle });
+                $("#FLashCardDiv2").load("category.php" ,{ catTitle });
               },
               error:function (xhr, ajaxOptions, thrownError){
                 alert(thrownError);

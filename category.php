@@ -9,7 +9,7 @@
 <body>
 
 <div class="container" id="FlashCardDiv2">
-<button type='button' class='btn btn-primary btn-sm' id='buttonCat' data-toggle='modal' data-target='#myModal'> Back to Categories </button>
+<button type='button' class='btn btn-primary btn-sm' id='buttonCat1'> Back to Categories </button>
 	
 	<div class="catTitle">
 		<?php
@@ -48,12 +48,10 @@
 
 		/* Open Category Page  */
 		$(document). ready(function(){
-        $("#buttonCat"). click(function(){
-
-        $("body"). load ("welcome.php");
+            $("#buttonCat1"). click(function(){
+                $("body"). load ("welcome.php");
+            });
         });
-
-      });
 	</script>
 
 </html>
