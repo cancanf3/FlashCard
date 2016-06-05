@@ -22,7 +22,9 @@
          $sql     = "SELECT C_TITLE, TITLE, DEFINITION FROM QUESTION WHERE U_EMAIL= '$email' AND C_TITLE= '$catTitle'";
          $result  = mysqli_query($db, $sql);
 		
-
+         echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' 
+               data-toggle='modal' data-target='#myModal'>";
+         echo "Register Category</button> </div>";
 
          echo "<h1> Category " .$catTitle. " User: " .$_SESSION['login_user']. "</h1>";
          while( $row = mysqli_fetch_array($result) ){

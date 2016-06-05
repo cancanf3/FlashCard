@@ -24,7 +24,7 @@
                 echo "<h1> Welcome ".$_SESSION['login_user']."</h1>";
                 echo "</div>";
                 echo "<div class='FLashCardDiv' id='FLashCardDiv2'>";
-                echo "<div class='SubTitle'>";
+                echo "<div class='SubTitle' id='welcome'>";
                 echo "<p> Current Categories </p> ";
                 echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' 
                       data-toggle='modal' data-target='#myModal'>";
@@ -110,7 +110,7 @@
                     return false;
             }
 
-
+            // Add in Welcome
             $.ajax( {
                 type: 'POST',
                url: '/FlashCard/respond.php',
@@ -130,10 +130,36 @@
                 error:function (xhr, ajaxOptions, thrownError){
                   alert(thrownError);
                 }
-            }); 
+            });
+            }; // End of if Statement
+
+
+            // Add in Category 
+            /*
+            $.ajax( {
+                type: 'POST',
+               url: '/FlashCard/respond.php',
+               data: {ADD_QUESTION_TITLE: $(".input-sm").val(), ADD_QUESTION_DEF: $(".input-lg").val()},
+
+                success:function(respond) {
+                  $('#myModal').modal('hide');
+                  $('.modal-backdrop').remove();
+                  var titles   = $(".input-sm").val();
+                  var descript = $(".input-lg").val();
+                  var colors   = ["#428bca","#ec971f","#c9302c","#5cb85c","#bb39d7"];
+                  var count    = $(".row").children().size();
+                  count        = count % 5;
+
+                  $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:'+colors[count]+'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true" ></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p id="tag-description">' + descript + '</p> </div> </div> ');
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                  alert(thrownError);
+                }
+            });
+
+            }; // End of if statement */ 
+
           });
-
-
         });
 
         /* Edit a Category */
