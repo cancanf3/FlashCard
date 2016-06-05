@@ -148,9 +148,7 @@
 
           $(".input-sm").val(old_titles);
           $(".input-lg").val(descript);
-
-
-          $("#saved-button").unbind().click(function(){   
+          $("#saved-button").unbind().click(function(){ 
             
           if ($(".input-sm").val()==='') {
             alert("Please enter a Title.");
@@ -174,8 +172,13 @@
               error:function (xhr, ajaxOptions, thrownError){
                 alert(thrownError);
               }
-            });   
-          });        
+            });
+             
+          });
+
+          
+
+          
         });
 
 
