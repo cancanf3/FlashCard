@@ -23,7 +23,7 @@
 
                 echo "<h1> Welcome ".$_SESSION['login_user']."</h1>";
                 echo "</div>";
-                echo "<div class='FLashCardDiv' id='FLashCardDiv2'>";
+                echo "<div class='FLashCardDiv' id='FLashCardDiv1'>";
                 echo "<div class='SubTitle' id='welcome'>";
                 echo "<p> Current Categories </p> ";
                 echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' 
@@ -131,7 +131,6 @@
                   alert(thrownError);
                 }
             });
-            }; // End of if Statement
 
 
             // Add in Category 
@@ -158,7 +157,6 @@
             });
 
             }; // End of if statement */ 
-
           });
         });
 
@@ -234,6 +232,8 @@
           $(document).on("click",".tag-title", function(){
             var catTitle        = $(this).parent().parent().children("#box-content").children("#tag-title").text();
             var thedata         = 'SHOW_CAT=' + catTitle
+            var whatwas         = $("#FLashCardDiv1").clone().prop('id','FLashCardDiv-clone');
+
             
             $.ajax( {
               type: 'POST',
@@ -242,12 +242,16 @@
               dataType: 'json',
 
               success:function(respond) {
-                $("#FLashCardDiv2").load("category.php" ,{ catTitle });
+                $("#FLashCardDiv1").load("category.php" ,{ catTitle });
               },
               error:function (xhr, ajaxOptions, thrownError){
                 alert(thrownError);
               }
            });
+
+            $(document).on("click","#buttonCat1", function(){
+              $("#FLashCardDiv1").html(whatwas.html());
+            });
             
           }); 
 
