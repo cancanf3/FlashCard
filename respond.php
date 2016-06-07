@@ -19,7 +19,7 @@
 	}	
 
 	// Add in Category
-	if (isset($_POST["ADD_QUESTION_TITLE"]) && strlen($_POST["ADD_QUESTION_TITLE"]) > 0) {
+	else if (isset($_POST["ADD_QUESTION_TITLE"]) && strlen($_POST["ADD_QUESTION_TITLE"]) > 0) {
 
 		$u_email 	  = mysqli_real_escape_string($db, $_SESSION['login_user']);
 		$title 	  	  = mysqli_real_escape_string($db, $_POST['ADD_QUESTION_TITLE']);

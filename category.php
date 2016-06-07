@@ -24,7 +24,7 @@
       		
                echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' 
                      data-toggle='modal' data-target='#myModal'>";
-               echo "Register Category</button> </div>";
+               echo "Register a Question</button> </div>";
 
                echo "<h1> Category " .$catTitle. " User: " .$_SESSION['login_user']. "</h1>";
                while( $row = mysqli_fetch_array($result) ){
