@@ -138,7 +138,8 @@
               $.ajax( {
                 type: 'POST',
                 url: '/FlashCard/respond.php',
-                data: {ADD_QUESTION_TITLE: $(".input-sm").val(), ADD_QUESTION_DEF: $(".input-lg").val()},
+                data: {ADD_QUESTION_TITLE: $(".input-sm").val(), ADD_QUESTION_DEF: $(".input-lg").val(), 
+                       ADD_QUESTION_C_TITLE: $(".title").attr("id")},
 
                 success:function(respond) {
                   $('#myModal').modal('hide');

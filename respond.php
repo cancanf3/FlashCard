@@ -22,12 +22,13 @@
 	else if (isset($_POST["ADD_QUESTION_TITLE"]) && strlen($_POST["ADD_QUESTION_TITLE"]) > 0) {
 
 		$u_email 	  = mysqli_real_escape_string($db, $_SESSION['login_user']);
+		$c_title 	  = mysqli_real_escape_string($db, $_POST['ADD_QUESTION_C_TITLE']);
 		$title 	  	  = mysqli_real_escape_string($db, $_POST['ADD_QUESTION_TITLE']);
-		$description  = mysqli_real_escape_string($db, $_POST['ADD_QUESTION_DEF']);
-		$sql 		  = "INSERT INTO QUESTION (U_EMAIL, TITLE, DEFINITION) VALUES ('$u_email', '$title', '$description')";
+		$definition   = mysqli_real_escape_string($db, $_POST['ADD_QUESTION_DEF']);
+		$sql 		  = "INSERT INTO QUESTION (U_EMAIL, C_TITLE, TITLE, DEFINITION) VALUES ('$u_email','$c_title','$title','$definition')";
 
 		if (!mysqli_query($db,$sql)) {
-			header("HTTP/1.1 500 Category was created already");
+			header("HTTP/1.1 500 Question name was created already");
 			exit();
 		}
 

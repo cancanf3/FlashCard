@@ -26,7 +26,7 @@
                      data-toggle='modal' data-target='#myModal'>";
                echo "Register a Question</button> </div>";
 
-               echo "<h1> Category " .$catTitle. " User: " .$_SESSION['login_user']. "</h1>";
+               echo "<h1 id=".$catTitle." class='title'> Category " .$catTitle. " User: " .$_SESSION['login_user']. "</h1>";
                while( $row = mysqli_fetch_array($result) ){
                   echo '<div class="col-md-3 text-center">';
                   echo '<div class="box">';
