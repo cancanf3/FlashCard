@@ -98,8 +98,7 @@
   <script type="text/javascript">
      $(document).ready(function() {
 
-        /* Add a Category */
-
+        /* Add Information */
         $(document).on("click","#buttonCat", function() {
           $('#myInput').focus();
           $(".input-sm").val("");
@@ -150,7 +149,7 @@
                   var count    = $(".row").children().size();
                   count        = count % 5;
 
-                  $(".row").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:'+colors[count]+'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true" ></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' + titles + '</h1>  <p id="tag-description">' + descript + '</p> </div> </div> ');
+                  $("#FlashCardDiv2").append('<div class="col-md-3 text-center">  <div class="box"> <div class="border" style="background-color:'+colors[count]+'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i> <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true" ></i>  </div> <div id="box-content" class="box-content" > <h1 id="tag-title" >' + titles + '</h1>  <p id="tag-description">' + descript + '</p> </div> </div> ');
                 },
                 error:function (xhr, ajaxOptions, thrownError){
                   alert(thrownError);
@@ -160,7 +159,7 @@
           });
         });
 
-        /* Edit a Category */
+        /* Edit Information */
         $(document).on("click",".fa-pencil-square-o",function() {
           
           $(document).on("focus",'#myInput');
@@ -182,21 +181,44 @@
             var titles    = $(".input-sm").val();
             var descript  = $(".input-lg").val();
 
-            $.ajax( {
-              type: 'POST',
-              url: '/FlashCard/respond.php',
-              data: {EDIT_CATEGORY_TITLE: titles, EDIT_CATEGORY_DES: descript, OLD_CATEGORY_TITLE: old_titles},
+            if ($("#buttonCat").text() == 'Register Category') {
+              $.ajax( {
+                type: 'POST',
+                url: '/FlashCard/respond.php',
+                data: {EDIT_CATEGORY_TITLE: titles, EDIT_CATEGORY_DES: descript, OLD_CATEGORY_TITLE: old_titles},
 
-              success:function(respond) {
-                 $('#myModal').modal('hide');
-                 $('.modal-backdrop').remove();
-                 old_titles_obj.text(titles);
-                 old_descript_obj.text(descript);
-              },
-              error:function (xhr, ajaxOptions, thrownError){
-                alert(thrownError);
-              }
-            });
+                success:function(respond) {
+                   $('#myModal').modal('hide');
+                   $('.modal-backdrop').remove();
+                   old_titles_obj.text(titles);
+                   old_descript_obj.text(descript);
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                  alert(thrownError);
+                }
+              });
+            }
+            else {
+              $.ajax( {
+                type: 'POST',
+                url: '/FlashCard/respond.php',
+                data: {EDIT_QUESTION_TITLE: titles, EDIT_QUESTION_DES: descript, OLD_QUESTION_TITLE: old_titles, 
+                       EDIT_QUESTION_C_TITLE: $(".title").attr("id")},
+
+                success:function(respond) {
+                   $('#myModal').modal('hide');
+                   $('.modal-backdrop').remove();
+                   old_titles_obj.text(titles);
+                   old_descript_obj.text(descript);
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                  alert(thrownError);
+                }
+              });
+
+
+            }
+
              
           });
 
@@ -206,53 +228,54 @@
         });
 
 
-        /* Delete a Category */
+        /* Delete Information */
         $(document).on("click",".fa-trash-o", function() {
 
            var title  = $(this).parent().parent().children("#box-content").children("#tag-title").text();
            var box    = $(this).parent().parent().parent();
-           var mydata = 'DEL_CATEGORY=' + title;
            $(this).hide();
 
-           $.ajax( {
-              type: 'POST',
-              url: '/FlashCard/respond.php',
-              data: mydata,
+           if (($("#buttonCat").text() == 'Register Category')) {
+             $.ajax( {
+                type: 'POST',
+                url: '/FlashCard/respond.php',
+                data: {DEL_CATEGORY: title},
 
-              success:function(respond) {
-                box.remove();
-              },
-              error:function (xhr, ajaxOptions, thrownError){
-                alert(thrownError);
-              }
-           });
+                success:function(respond) {
+                  box.remove();
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                  alert(thrownError);
+                }
+             });
+            }
+            else {
+             $.ajax( {
+                type: 'POST',
+                url: '/FlashCard/respond.php',
+                data: {DEL_QUESTION: title, DEL_QUESTION_C_TITLE: $(".title").attr("id") },
+
+                success:function(respond) {
+                  box.remove();
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                  alert(thrownError);
+                }
+             });
+
+            }
         });
 
-        /* Open a Category */
+        /* Open/Close Questions */
           $(document).on("click",".tag-title", function(){
             var catTitle        = $(this).parent().parent().children("#box-content").children("#tag-title").text();
-            var thedata         = 'SHOW_CAT=' + catTitle
             var whatwas         = $("#FLashCardDiv1").clone().prop('id','FLashCardDiv-clone');
 
-            
-            $.ajax( {
-              type: 'POST',
-              url: '/FlashCard/respond.php',
-              data: thedata,
-              dataType: 'json',
-
-              success:function(respond) {
-                $("#FLashCardDiv1").load("category.php" ,{ catTitle });
-              },
-              error:function (xhr, ajaxOptions, thrownError){
-                alert(thrownError);
-              }
-           });
-
+            $("#FLashCardDiv1").load("category.php" ,{ catTitle });
             $(document).on("click","#buttonCat1", function(){
               $("#FLashCardDiv1").html(whatwas.html());
             });
-            
+
           }); 
 
      });   
