@@ -5,6 +5,8 @@
       <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> 
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+     <!-- <script type="text/javascript" scr="main.js"></script> -->
 </head>
    <body>
 
@@ -24,7 +26,9 @@
       		
                echo "<button type='button' class='btn btn-primary btn-sm' id='buttonCat' 
                      data-toggle='modal' data-target='#myModal'>";
-               echo "Register a Question</button> </div>";
+               echo "Register a Question</button> ";
+
+               echo "<a href='/FlashCard/exam.php'> <button type='button' class='btn btn-primary btn-sm'> Start Exam </button></a> </div>";
 
                echo "<h1 id=".$catTitle." class='title'> Category " .$catTitle. " User: " .$_SESSION['login_user']. "</h1>";
                while( $row = mysqli_fetch_array($result) ){
@@ -32,7 +36,7 @@
                   echo '<div class="box">';
                   echo '<div class="border" style="background-color:'.$color[$i].'"> <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"> </i>  <i id="exitIcon" class="fa fa-trash-o" aria-hidden="true"></i> </div>';
                      $title = $row['TITLE'];
-                  echo '<div id="box-content" class="box-content" > <h1 id="tag-title" class="tag-title">' .$title. "</h1>";
+                  echo '<div id="box-content" class="box-content" > <h1 id="tag-title">' .$title. "</h1>";
                      $description = $row['DEFINITION'];
                   echo "<p id='tag-description'>" .$description. "</p>";  
                   echo "</div> </div> </div>";
